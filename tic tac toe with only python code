@@ -1,0 +1,128 @@
+def welcome(): #Prints the welcome banner for the Tic Tac Toe game.
+    text = "WELCOME TO TIC TAC TOE!!!"
+    print(" "*2, "*"*30)
+    print(" "*2, "*", text.center(26), "*")
+    print(" "*2, "*"*30)
+    
+def board(values): #Prints the current state of the Tic Tac Toe board.
+    print("\n")
+    print("\t _____", "_____", "_____")
+    for i in range(0, len(values), 3):
+        print("\t|     |     |     |")
+        print("\t|  {}  |  {}  |  {}  |".format(values[i], values[i+1], values[i+2]))
+        print('\t|_____|_____|_____|')
+
+def player_move(icon, choice): #Handles the player's move by updating the board
+    while True:
+        if values[choice - 1] == " ":
+            # Update the board with the player's move if the position is empty
+            values[choice - 1] = icon
+            break 
+        else:
+            # Inform the player if the chosen position is already filled
+            print("\nInvalid! That space was filled!")
+            print(f"Please enter a position other than position number {choice}\n")
+            choice = int(input("Enter your move (1-9): "))
+            
+def result(icon): #Prints the winning message
+    string = "Congratulation! "+ icon + " won"
+    print("\n"," ", "*"*25)
+    print(" "*2, "*", string, "*")
+    print(" "*2, "*"*25)
+    
+def win_identify(icon): #Identifies if the current player has won.
+    # Check rows for a win
+    for i in range(0, len(values), 3):
+        if values[i] == values[i+1]== values[i+2] == icon:
+            result(icon)
+            return True
+        
+    # Check columns for a win
+    for i in range(3):
+        if values[i] == values[i+3] == values[i+6] == icon:
+            result(icon)
+            return True
+        
+    # Check diagonals for a win
+    if values[2] == values[4] == values[6] == icon:
+        result(icon)
+        return True
+    elif values[0] == values[4] == values[8] == icon:
+        result(icon)
+        return True
+    return False
+    
+def draw_identity(): #Checks if the game has ended in a draw.
+    # Print draw message if there are no empty spaces left
+    if " " not in values:
+        print("\n"," "*7, "*"*16)
+        print(" "*8,"*", "   Draw!!!  ", "*")
+        print(" "*8, "*"*16)
+        return True
+    return False
+
+# Main Game Loop              
+game = input("Do you wanna play the game ('y' or 'n')? ")
+while game != 'y' and game != 'n':
+    game = input("Invalid! Please enter 'y' or 'n'! ")
+    
+# Initialize game statistics
+count_game = 0
+x_won = 0
+o_won = 0
+draw = 0
+while game == 'y':
+    count_game += 1
+    print("\n")
+    welcome()
+    values = [" " for i in range(9)]
+    board(values)
+
+    while True:
+        # X's turn
+        print("\nIt's X turn:")
+        choice = int(input("Enter your move (1-9): "))
+        while choice > 9 or choice < 1:
+            choice = int(input("\nInvalid! Please enter 1-9: "))
+        player_move("X", choice)
+        board(values)
+        if win_identify("X"):
+            x_won += 1
+            print("\n")
+            break
+        elif draw_identity():
+            draw += 1
+            print("\n")
+            break
+         # O's turn
+        print("\nIt's O turn:")             
+        choice = int(input("Enter your move (1-9): "))
+        while choice > 9 or choice < 1:
+            choice = int(input("\nInvalid! Please enter 1-9: "))
+        player_move("O", choice)
+        board(values)
+        if win_identify("O"):
+            o_won += 1
+            print("\n")
+            break
+        elif draw_identity():
+            draw += 1
+            print("\n")
+            break
+
+    # Ask the user if they want to play another game
+    game = input("Do you wanna play the game ('y' or 'n')? ")
+    while game != "y" and game != "n":
+
+        game = input("Invalid! Please enter 'y' or 'n'! ")
+# Display Game Statistics
+print("\n --> **Game Statistic** <--")
+print("       ", "You played:", count_game)
+print("       ", "   X won:  ", x_won)
+print("       ", "   O won:  ", o_won)
+print("       ", "   Draw:   ", draw)
+
+
+
+
+
