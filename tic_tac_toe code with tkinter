@@ -74,7 +74,7 @@ root = tk.Tk()
 root.title("Tic Tac Toe")
 root.geometry("500x600")
 # Load the image
-bg_image = PhotoImage(file="sky.png")
+bg_image = PhotoImage(file="tictactoe.png")
 
 # Add a label to display the image as a background
 background_label = tk.Label(root, image=bg_image)
