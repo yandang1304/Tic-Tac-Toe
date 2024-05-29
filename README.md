@@ -2,7 +2,7 @@
 > Tic Tac Toe is a traditional game for two participants who alternate in marking the squares on a 3x3 board. The objective is to be the first to get three of their symbols in a row, whether it be horizontally, vertically, or diagonally, to win the game. This project implements a simple Tic Tac Toe game using Python with a console-based interface.
 
 <p align="center">
-<img src="tic.png" width="200" />
+<img src="tictactoe.png" width="200" />
 </p>
 
 ## Table of Contents
